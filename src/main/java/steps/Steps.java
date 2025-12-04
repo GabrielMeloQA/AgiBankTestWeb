@@ -1,6 +1,7 @@
 package steps;
 
 import driverFactory.DriverFactory;
+import io.cucumber.java.AfterAll;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -9,7 +10,6 @@ import io.cucumber.java.en.When;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.Assert;
 import org.openqa.selenium.*;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -23,6 +23,11 @@ public class Steps {
     @Before
     public void setup() {
         WebDriverManager.chromedriver().setup();
+    }
+
+    @AfterAll
+    public static void kill() {
+        DriverFactory.quitDriver();
     }
 
     @Given("que eu abro a página {string}")
